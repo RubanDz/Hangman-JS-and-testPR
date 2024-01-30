@@ -2,7 +2,7 @@
 
 // Приветствие и объяснение правил
 alert('Привет! Правила игры: количество *, соответствует количеству букв в слове. Твоя цель: полностью отгадать слово. Удачи!)');
-alert('Все буквы нужно вводить строчными!');
+// alert('Все буквы нужно вводить строчными!');
 
 // Выбор случайного слова
 var words = [
@@ -23,9 +23,10 @@ for (var i = 0; i < word.length; i++) {
     answerArray[i] = ' * ';
 }
 var remainingLetters = word.length; // отслеживаем количество букв, которые осталось угадать
-
+var maxAttempts = 6; // Максимаоьное количество попыток
+var attempts = 0; // Текущее количество попыток
 // Программируем игровой цикл
-while (remainingLetters > 0) {
+while (remainingLetters > 0 && attempts < maxAttempts) {
     // текущее состояние игры
     alert(answerArray.join(' '));
     //Обработка введенного ответа от игорока
@@ -37,17 +38,29 @@ while (remainingLetters > 0) {
     } else {
         guess = guess.toLocaleLowerCase(); // преобразование введенной буквы в нижний регистр
         //Обновление состояние игры
+        var correctGuess = false;
         for (var j = 0; j < word.length; j++) {
             if (word[j] === guess) {
                 answerArray[j] = guess;
                 remainingLetters--;
+                correctGuess = true;
             }
+        }
+        // Если угадана неверная буква, увеличиваем количество попыток
+        if (!correctGuess) {
+            attempts++;
+            alert('Неверная буква! Осталось попыток: ' + (maxAttempts - attempts))
         }
     }
 }
 // Конец игры
-alert(answerArray.join(' '));
-alert('Отлично! Было загадано слово ' + word);
+if (remainingLetters === 0) {
+
+    alert(answerArray.join(' '));
+    alert('Отлично! Было загадано слово ' + word);
+} else {
+    alert('Вы проиграли. Было загадано слово: ' + word);
+}
 
 
 
