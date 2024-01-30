@@ -37,6 +37,10 @@ while (remainingLetters > 0 && attempts < maxAttempts) {
         alert('Пожалуйста введите только одну букву!');
     } else {
         guess = guess.toLocaleLowerCase(); // преобразование введенной буквы в нижний регистр
+        if (answerArray.includes(guess)) {
+            alert('Вы уже угадали эту букву!');
+            continue;
+        } // Если буква уже угадана
         //Обновление состояние игры
         var correctGuess = false;
         for (var j = 0; j < word.length; j++) {
