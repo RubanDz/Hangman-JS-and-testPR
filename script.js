@@ -40,6 +40,10 @@ while (remainingLetters > 0) {
         }
     }
 }
+// Конец игры
+alert(answerArray.join(' '));
+alert('Отлично! Было загадано слово ' + word);
+
 
 
     
